@@ -3,7 +3,6 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib> // for EXIT_FAILURE
-#include <sstream> // for converting strings to numbers during importing a file
 
 #include "StoreItem.h"
 
@@ -47,6 +46,15 @@ int main()
     string s; // s = string
     double d; // d = double
     int n; // n = number
+    // Below are all the strings that will be used by 'stream to' function to double to int
+    string  tempSellPrice, // to hold the converted string to double
+            tempCostPrice,
+            tempUnitsStored,
+            tempUnitsSold,
+            tempYear, // All this temp is to hold the converted string to int
+            tempMonth,
+            tempDay;
+
 
   // Looping main menu
   while(escape == false)
@@ -61,8 +69,8 @@ int main()
     cout << "6. Display selected data field(s)\n";
     cout << "7. Search\n";
     cout << "8. Sort selected data field\n";
-    cout << "9. Save the table into a text file\n";
-    cout << "10. Load a table from a text file\n";
+    cout << "9. Save/Export the table into a text file\n";
+    cout << "10. Load/Import a table from a text file\n";
     cout << "11. Exit\n";
     cout << "\nChoose a number to proceed: ";
     cin >> choice;
@@ -414,7 +422,7 @@ int main()
                 cout << "\n>> Finished searching";
                 p2c();
                 break;
-        case 8: // Sort
+        case 8: // !Sort
                 break;
         case 9: { // Save to text file
                 ofstream newfile;
@@ -437,23 +445,34 @@ int main()
                   a5 = myVector[i].getYear();
                   a6 = myVector[i].getMonth();
                   a7 = myVector[i].getDay();
-                  newfile << s1 << endl << s2 << endl << s3 << endl <<
+                  if (i != size - 1) // To make sure there is no extra line in the exported file because that will cause some problem when importing the said file; things would get doubled
+                  {
+                    newfile << s1 << endl << s2 << endl << s3 << endl <<
                           s4 << endl << s5 << endl << a1 << endl << a2 <<
                           endl << a3 << endl << a4 << endl << a5 << endl <<
                           a6 << endl << a7 << endl;
+                  }
+                  else
+                  newfile << s1 << endl << s2 << endl << s3 << endl <<
+                        s4 << endl << s5 << endl << a1 << endl << a2 <<
+                        endl << a3 << endl << a4 << endl << a5 << endl <<
+                        a6 << endl << a7; // without the endl at the end
+
                 }
+
                 newfile.close();
                 cout << "\n\n>> The data has been successfully exported to 'Exported Data.txt' file";
                 p2c();
                 break;
                 }
-        case 10:/*{// Load from text file
+        case 10:{// Load from text file
                   // User input file name to be imported
-                  string input;
-                  string word;
+                  string input; // File name to be imported
+
                   size = myVector.size();
-                  int counter1 = 0, // For the 12 data fields
-                      counter2 = 0, // For the number of items to be imported
+
+                  myVector.clear(); // clearing the vector to be used by the importer
+
                   cout << "\nEnter the file name to be imported: ";
                   cin.ignore();
                   getline(cin, input);
@@ -462,40 +481,45 @@ int main()
                   // some safety measure if file can't be open
                   if(!impfile.is_open())
                   {
-                    cout << ">> ERROR!";
+                    cout << "\n>> ERROR! File cannot be found or read! Terminating program...\n\n";
                     exit(EXIT_FAILURE);
                   }
                   else
-                  getline(impfile, word);
-                  while (counter2 <= size )
-                  {
-                    // PUT THE CODES HERE
-                    while (counter1 <= 12)
-                    {
-                      myVector.setID(word);
-                      myVector.setName();
-                      myVector.setDescription();
-                      myVector.setCategory();
-                      myVector.setManufacturer();
-                      myVector.setSellPrice();
-                      myVector.setCostPrice();
-                      myVector.setUnitsStored();
-                      myVector.setUnitsSold();
-                      myVector.setYear();
-                      myVector.setMonth();
-                      myVector.setDay();
+                    while (!impfile.eof()) // Read until the end of line
+                      {
+                        getline(impfile, ID); // read the next line
+                        getline(impfile, name); // read the next line
+                        getline(impfile, description); // read the next line
+                        getline(impfile, category); // read the next line
+                        getline(impfile, manufacturer); // read the next line
+                        // more complex because changing data type string to double
+                        getline(impfile, tempSellPrice); // read the next line
+                        getline(impfile, tempCostPrice); // read the next line
+                        // following lines changed string to int
+                        getline(impfile, tempUnitsStored); // read the next line
+                        getline(impfile, tempUnitsSold); // read the next line
+                        getline(impfile, tempYear); // read the next line
+                        getline(impfile, tempMonth); // read the next line
+                        getline(impfile, tempDay); // read the next line
+                        //Conversion of strings to double and int
 
-                    }
+                        sellPrice = stod(tempSellPrice);
+                        costPrice = stod(tempCostPrice);
 
-
-
-                    // END HERE
-                    cout << word << endl;
-                    getline(impfile, word); // read the next line
+                        unitsStored = stoi(tempUnitsStored);
+                        unitsSold = stoi(tempUnitsSold);
+                        year = stoi(tempYear);
+                        month = stoi(tempMonth);
+                        day = stoi(tempDay);
+                        // Now create the object 'Item' and store it in the vector 'myVector'
+                        StoreItem Item(ID, name, description, category, manufacturer, sellPrice,
+                        costPrice, unitsStored, unitsSold, year, month, day);
+                        myVector.push_back(Item);
+                      }
+                  cout << "\n>> The file has been successfully imported";
+                  p2c();
+                  break;
                   }
-
-                break;
-              }*/
         default: cout << choice << " is not a valid input!\n\n";
                 break;
       }
