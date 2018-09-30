@@ -13,3 +13,5 @@ What is done:
 - Show all data
 - Search for item with given text (match case)
 - Saving/Exporting record to a txt file.
+
+NOTE: main.cpp IS inventory.cpp. I just like the name 'main' better. Will change during submission.
