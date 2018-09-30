@@ -5,7 +5,7 @@ It has reached the end. Goodbye.
 (Was) NEW:
 - Importing file is now complete
 
-What will never be done <is not done>:
+What will never be done --is not done--:
 - Searching for numbers (with arguments)
 - Sorting records
 
