@@ -1,9 +1,11 @@
 # Milestone2
 
+NEW:
+- Importing file is now complete
+
 What is not done:
 - Searching for numbers (with arguments)
 - Sorting records
-- Importing file
 
 What is done:
 - Add new item
@@ -13,6 +15,7 @@ What is done:
 - Show all data
 - Search for item with given text (match case)
 - Saving/Exporting record to a txt file.
+- Importing file
 
 NOTE: 
 - main.cpp IS inventory.cpp. I just like the name 'main' better. Will change during submission.
