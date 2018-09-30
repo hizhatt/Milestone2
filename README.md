@@ -15,10 +15,10 @@ What is done:
 - Saving/Exporting record to a txt file.
 
 NOTE: 
-\n-> main.cpp IS inventory.cpp. I just like the name 'main' better. Will change during submission.
-\n-> to compile and run:
-    \n1. Run Command Prompt or Terminal (macOS)
-    \n2. Compile the two .cpp file together. 
-        \nEg: g++ main.cpp storeitem.cpp
-    \n3. Run the .exe or .out(macOS) file
-    \n4. Profit ????
+- main.cpp IS inventory.cpp. I just like the name 'main' better. Will change during submission.
+- to compile and run:
+    1. Run Command Prompt or Terminal (macOS)
+    2. Compile the two .cpp file together. 
+        Eg: g++ main.cpp storeitem.cpp
+    3. Run the .exe or .out(macOS) file
+    4. Profit ????
