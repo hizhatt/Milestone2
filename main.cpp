@@ -1,8 +1,21 @@
+/******|*********|********|
+Program: inventory.cpp
+Course: Programming Fundementals
+Year: 2018/19 Trimester 1
+Name: Muhammad Hizri Bin Hatta
+ID: 1181300659
+Lecture Section: TC02
+Tutorial Section: TT04
+Email: hizhatt@gmail.com
+Phone: 019-2795750
+*******|*********|********/
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
 #include <cstdlib> // for EXIT_FAILURE
+#include <cctype> // for tolower and toupper
 
 #include "StoreItem.h"
 
@@ -11,7 +24,8 @@ using namespace std;
 // Function prototype
 void p2c();
 int searchText(const vector<StoreItem>, int, string);
-//int searchNumCostPrice(const vector<StoreItem>, int, string,)
+void createArray(const vector<StoreItem>, int);
+
 
 // --------- START OF MAIN FUNCTION ----------
 int main()
@@ -382,7 +396,7 @@ int main()
                 break;
         case 6: // Display selected data field(s)
                 //Which data field(s) to display
-                cout << "Which data field do you want to display?";
+                cout << "\n\nSorry, not available.\n\n";
                 break;
         case 7: // Custom search
                 choice = 0; // Resets the choice as precaution
@@ -400,7 +414,7 @@ int main()
                               getline(cin, text);
                               //cout << text << endl;
                               vSize = myVector.size();
-                              //cout << vSize;
+                              cout << vSize;
                               p = searchText(myVector, vSize, text);
                               if (p == -1)
                                 cout << "\n>> No match.\n";
@@ -416,6 +430,7 @@ int main()
                               }
                             break;
                     case 2: // Seach for numbers
+                            cout << "\n\nJust kidding. I didn't completed this. Sorry. Too much error\n\n";
                             break;
                   }
                 }
@@ -423,16 +438,19 @@ int main()
                 p2c();
                 break;
         case 8: // !Sort
+                cout << "\n\nSorry. Too much error, it got scraped :(\n\n";
                 break;
         case 9: { // Save to text file
+                cout << "\n>> Exporting file... \n";
                 ofstream newfile;
                 newfile.open("Exported Data.txt");
                 // Now we want to put in all the data from objects in vector to the file
                 size = myVector.size(); // Put the value in size so that it doesn't have to keep finding the size in each for loop
                 for(unsigned i = 0; i < size; i++ ) // Unsigned i because .size() gives unsigned value
                 { string s1,s2,s3,s4,s5; // temporary data placeholder before we put into the file
-                  int a1,a2,a3,a4,a5,a6,a7;
-                  cout << "Saving item " << i+1 << " to the text file..." << endl; // i + 1 because index start with 0
+                  double a1,a2;
+                  int a3,a4,a5,a6,a7;
+                  cout << "Saving Item " << i+1 << " to the text file..." << endl; // i + 1 because index start with 0
                   s1 = myVector[i].getID();
                   s2 = myVector[i].getName();
                   s3 = myVector[i].getDescription();
@@ -461,7 +479,7 @@ int main()
                 }
 
                 newfile.close();
-                cout << "\n\n>> The data has been successfully exported to 'Exported Data.txt' file";
+                cout << "\n\n>> The data has been successfully exported to 'Exported Data.txt'";
                 p2c();
                 break;
                 }
